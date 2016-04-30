@@ -35,7 +35,7 @@ void log_print(char* filename, int line, char *fmt,...)
     if(SESSION_TRACKER > 0)
         fp = fopen (log_file,"a+");
     else
-        fp = fopen (log_file,"w");
+        fp = fopen (log_file,"a+");
 
     fprintf(fp,"%s ",print_time());
     va_start( list, fmt );

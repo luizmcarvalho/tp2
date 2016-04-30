@@ -36,9 +36,6 @@ extern  char ** tp_proc_1_svc(struct tp_info *, struct svc_req *);
 #define TP_EXIT 2
 extern  void * tp_exit_1(struct tp_info *, CLIENT *);
 extern  void * tp_exit_1_svc(struct tp_info *, struct svc_req *);
-#define TP_STATUS 3
-extern  int * tp_status_1(struct tp_info *, CLIENT *);
-extern  int * tp_status_1_svc(struct tp_info *, struct svc_req *);
 extern int tp_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
@@ -48,9 +45,6 @@ extern  char ** tp_proc_1_svc();
 #define TP_EXIT 2
 extern  void * tp_exit_1();
 extern  void * tp_exit_1_svc();
-#define TP_STATUS 3
-extern  int * tp_status_1();
-extern  int * tp_status_1_svc();
 extern int tp_prog_1_freeresult ();
 #endif /* K&R C */
 

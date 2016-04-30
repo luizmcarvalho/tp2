@@ -64,8 +64,3 @@ void *tp_exit_1_svc(struct tp_info *in, struct svc_req *rqstp)
 	fflush(NULL);
 	exit(0);
 }
-
-int *tp_status_1_svc(tp_info *in, struct svc_req *rqstp)
-{
-    return (int *)1;
-}

@@ -1,4 +1,5 @@
 client
 maquina.*
 server
+/heartbeat
 tp_*

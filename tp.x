@@ -15,6 +15,5 @@ program TP_PROG
 	{
 		string TP_PROC(struct tp_info) = 1;
 		void TP_EXIT(struct tp_info) = 2;
-		int TP_STATUS(struct tp_info) = 3;
 	} = 1;
 } = 0x03071988;
