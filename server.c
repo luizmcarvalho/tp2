@@ -4,11 +4,15 @@
 #include <stdio.h>
 #include <syslog.h>
 #include "logger.h"
+#include <time.h>
 
-char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
+
+retorno_server* tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
 {
-
-	FILE* fpipe;
+    clock_t start = clock();
+    clock_t end;
+    float time;
+    FILE* fpipe;
     char* grep_args;
     char* comando = "grep ";
     char* comando_final;
@@ -16,7 +20,7 @@ char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
     char* n_maq = getenv("N_MAQ"); //  Numero da maquina a partir da variavel de ambiente
     char* file_log;
     char* prefixo_log = "maquina.";
-	static char* readPipeInto;
+    static char* readPipeInto;
 
     file_log = calloc(1,strlen(prefixo_log)+strlen(n_maq)+ 4 + 1);
 
@@ -39,23 +43,32 @@ char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
 
  	program1AndProgram2=(char*)malloc((strlen(comando_final) + 1)*sizeof(char));
 	strcpy(program1AndProgram2,comando_final);
+        struct retorno_server* retorno;
 
 	//Executa o comando
  	if ( !(fpipe = (FILE*)popen(program1AndProgram2,"r")) )
  	{
    		perror("Erro no comando!");
-        set_log_file(file_log);
-        LOG_PRINT("Erro no comando: '%s' [maquina: %s]",comando_final,n_maq);
+        	set_log_file(file_log);
+		end = clock();
+		time = (float)(end - start) / CLOCKS_PER_SEC;
+		retorno->execTime = time;
+        	LOG_PRINT("Erro no comando: '%s' [maquina: %s]. Gastos %f segundos",comando_final,n_maq,time);
    		exit(1);
  	}
  	//Salva saida do programa no readPipeInto
  	fread((char *)readPipeInto, 100000, 1, fpipe);
 	pclose(fpipe);
  	free(program1AndProgram2);
-    set_log_file(file_log);
-    LOG_PRINT("Comando executado: '%s' [maquina:%s]",comando_final,n_maq);
+        set_log_file(file_log);
+        end = clock();
+	time = (float)(end - start) / CLOCKS_PER_SEC;
+
+	retorno->execTime = time;
+        LOG_PRINT("Comando executado: '%s' [maquina:%s]. Gastos %f segundos",comando_final,n_maq, time);
  	//return output to the client
- 	return (char **)&readPipeInto;
+ 	retorno->grepOutput = (char **)&readPipeInto;
+	return retorno;
 }
 
 void *tp_exit_1_svc(struct tp_info *in, struct svc_req *rqstp)
