@@ -37,6 +37,6 @@ int main(int argc, char** argv)
         if(argc == 2 )
             sleep(argv[1]);
         else
-            sleep(60);
+            sleep(1);
     }
 }
