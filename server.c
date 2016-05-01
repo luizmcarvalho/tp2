@@ -11,7 +11,7 @@ char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
 {
     clock_t start = clock();
     clock_t end;
-    float time;
+    float time = 0.0;
     FILE* fpipe;
     char* grep_args;
     char* comando = "grep ";
@@ -51,7 +51,7 @@ char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
         set_log_file(file_log);
 		end = clock();
 		time = (float)(end - start) / CLOCKS_PER_SEC;
-        LOG_PRINT("Erro no comando: '%s' [maquina: %s][tempo no serviodor: %fs]",comando_final,n_maq,time);
+        LOG_PRINT("Erro no comando: '%s' [maquina: %s][tempo servidor:%fs]",comando_final,n_maq,time);
    		exit(1);
  	}
  	//Salva saida do programa no readPipeInto
@@ -61,7 +61,7 @@ char **tp_proc_1_svc(tp_info *in, struct svc_req *rqstp)
     set_log_file(file_log);
     end = clock();
 	time = (float)(end - start) / CLOCKS_PER_SEC;
-    LOG_PRINT("Erro no comando: '%s' [maquina: %s][tempo no serviodor: %fs]",comando_final,n_maq,time);
+    LOG_PRINT("Comando executado: '%s' [maquina: %s][tempo servidor:%fs]",comando_final,n_maq,time);
     //return output to the client
     return (char **)&readPipeInto;
 }

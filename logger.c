@@ -31,6 +31,7 @@ void log_print(char* filename, int line, char *fmt,...)
     va_list         list;
     char            *p, *r;
     int             e;
+    double          d;
 
     if(SESSION_TRACKER > 0)
         fp = fopen (log_file,"a+");
@@ -65,6 +66,14 @@ void log_print(char* filename, int line, char *fmt,...)
                     e = va_arg( list, int );
 
                     fprintf(fp,"%d", e);
+                    continue;
+                }
+                    /* float */
+                case 'f':
+                {
+                    d = va_arg( list, double );
+
+                    fprintf(fp,"%f", d);
                     continue;
                 }
 
