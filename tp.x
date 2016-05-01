@@ -9,16 +9,11 @@ struct tp_info {
 	name data;
 };
 
-struct retorno_server{
-	string grepOutput<>;
-   	float execTime;
-};
-
 program TP_PROG
 {
 	version TP_VERS
 	{
-		retorno_server TP_PROC(struct tp_info) = 1;
+		string TP_PROC(struct tp_info) = 1;
 		void TP_EXIT(struct tp_info) = 2;
 	} = 1;
 } = 0x03071988;

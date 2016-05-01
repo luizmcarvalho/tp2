@@ -31,12 +31,10 @@ int main(int argc, char**argv)
 	}
 	
   	clock_t start = clock();
-	struct retorno_server* retorno;
-	retorno = tp_proc_1(&t, cl);
+    char **result = tp_proc_1(&t, cl);
 	clock_t end = clock();
   	float time = (float)(end - start) / CLOCKS_PER_SEC;
-	printf("Recebeu %d bytes.\n\n %s\n",(int) strlen(*retorno->grepOutput),*retorno->grepOutput);
-	printf("Tempo gasto: Servidor %f segundos. Rede %f segundos. Total %f segundos.\n", retorno->execTime, time-retorno->execTime, time);
+    printf("Recebeu %d bytes [Tempo Total:%f segundos].\n\n %s\n",(int) strlen(*result),time,*result);
 	clnt_destroy(cl);
 	exit(0);
 }
