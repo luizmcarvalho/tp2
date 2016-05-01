@@ -1,7 +1,7 @@
 #include "unittest.h"
 // Include target source file to test in order to
 // define all the declared symbols.
-#include "yourcode.c"
+#include "tp2.c"
 
 // Write the test cases as function with prototype 'void (*) (void)'.
 void

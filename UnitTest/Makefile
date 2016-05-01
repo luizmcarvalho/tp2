@@ -3,9 +3,9 @@ vpath %.h lib
 
 P= runtests
 
-OBJECTS= tests_yourcode.o libunittest.so
-SOURCES= yourcode.c
-HEADERS= yourcode.h
+OBJECTS= tests_tp2.o libunittest.so
+SOURCES= tp2.c
+HEADERS= tp2.h
 INCLUES= lib
 
 CC= gcc
